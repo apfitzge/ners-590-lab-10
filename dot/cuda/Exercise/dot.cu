@@ -1,20 +1,11 @@
-#include <chrono>       // Timing
-#include <stdio.h>      // printf
-#include <cmath>        // AtomicAdd (hint)
+#include <chrono>               // Timing
+#include <stdio.h>              // printf
+#include <cmath>                // AtomicAdd (hint)
+#include "lab10_cuda_common.h"  // Error checking macro
 
 // Block size
 static constexpr const int BLOCK_SIZE = 256;
 
-// Error checking in CUDA for allocation and data passing
-// Copied from: https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api
-#define gpuErrCheck(ans) {gpuAssert((ans), __FILE__, __LINE__); }
-inline void gpuAssert(cudaError_t code, const char *file, int line,
-        bool abort=true) {
-    if(code != cudaSuccess) {
-        fprintf(stderr, "GPUAssert: %s %s %d\n", cudaGetErrorString(code), file, line);
-        if(abort) exit(code);
-    }
-}
 /**
  * \brief Cuda kernel to compute the dot-product of two vectors of length N
  * \param[out] ans The result
