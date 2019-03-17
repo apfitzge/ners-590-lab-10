@@ -68,7 +68,6 @@ int main(int argc, char** argv) {
     auto time = std::chrono::duration_cast<std::chrono::duration<double>>(t2-t1).count();
 
     // Check the result
-    // C is ROW MAJOR
     double maxError = 0.0;
     double db_A_cols = static_cast<double>(M);
     for(int row = 0, idx = 0; row < N; ++row) {
